@@ -1,0 +1,52 @@
+.container {
+    margin: 4rem 6rem;
+}
+
+.form-name-seller {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.button-cart {
+    cursor: pointer;
+    background-color: #C52F0C;
+    border: 0;
+    border-radius: 0.7rem;
+    color: #F6ECE2;
+    font-weight: bold;
+    font-size: 1rem;
+    height: 2.5rem;
+}
+
+.button-cart:hover {
+    background-color: #D15521;
+}
+
+.select {
+    border: 0.5rem solid #203936;
+    border-radius: 0.8rem;
+    padding: 0.2rem;
+    margin-right: 0.7rem;
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        margin: 4rem;
+    }
+    
+    .form-name-seller {
+        display: block;
+    }
+
+    .select {
+        margin: 0;
+        width: 100%;
+    }
+
+    .button-cart {
+        margin-top: 0.5rem;
+        width: 100%;
+    }
+}

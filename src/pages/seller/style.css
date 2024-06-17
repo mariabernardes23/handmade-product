@@ -1,0 +1,11 @@
+.name-user {
+    margin: 4rem 6rem;
+}
+
+.card-list {
+    margin: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}

@@ -1,0 +1,99 @@
+.navbar  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #D15521;
+    top: 0;
+    padding: 0.5rem 2rem; 
+}
+
+.name-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: bold;
+    color: #F6ECE2;
+}
+
+.name {
+    margin: 0;
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+} 
+
+.navbar  ul {
+    display: flex;
+}
+
+.navbar  li {
+   list-style: none; 
+}
+
+.link {
+    text-decoration: none;
+    font-weight: bold;
+    color: #F6ECE2;
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+}
+
+.menu {
+    display: none;
+    position: absolute;
+    right: 2rem;
+}
+
+.icon-menu {
+    color: #F6ECE2;
+}
+
+.open {
+    padding: 0;
+}
+
+.icon{
+    width: 2rem;
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        margin: 2rem;
+    }
+
+    .navbar  .menu {
+        display: flex;
+    }
+    
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .navbar  ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .navbar  ul.open {
+        display: flex;
+    }
+    
+    .navbar  ul li {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .navbar li {
+        padding: 0.5rem;
+    }
+
+    .icon{
+        display: none;
+    }
+    
+    .name {
+        font-size: 1.5rem;
+    }
+}

@@ -1,0 +1,19 @@
+.footer {
+    background-color: #D15521;
+    padding: 0 1rem;
+    text-align: center;
+}
+
+.information {
+    color: #FFFFFF;
+    padding: 0.5rem;
+}
+
+.social-network {
+    margin: 0 0.5rem;
+    color: #F6ECE2;
+}
+
+.social-network:hover {
+    color: #203936;
+}

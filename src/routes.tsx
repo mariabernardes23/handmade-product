@@ -1,0 +1,54 @@
+import { createBrowserRouter } from "react-router-dom";
+import { Layout } from "./components/layout";
+import { Home } from "./pages/home";
+import { Login } from "./pages/login";
+import { CreateProduct } from "./pages/create";
+import { UpdateProduct } from "./pages/update";
+import { Cart } from "./pages/cart";
+import { Seller } from "./pages/seller";
+import { OrderHistory } from "./pages/orderHistory";
+import { Private } from "./routes/private";
+import { Notfound } from "./pages/notfound";
+
+const router = createBrowserRouter([
+    {
+        element: <Layout/>,
+        children: [
+            {
+                path: '/',
+                element: <Home/>
+            },
+            {
+                path: '/login',
+                element: <Login/>
+            },
+            {
+                path: '/create-product',
+                element: <Private> <CreateProduct/> </Private>
+            },
+            {
+                path: '/update-product',
+                element: <Private> <UpdateProduct/> </Private>
+
+            }, 
+            {
+                path: '/cart',
+                element: <Private> <Cart/>  </Private>
+            },
+            {
+                path: '/sellers',
+                element: <Seller/>
+            },
+            {
+                path: '/order-history',
+                element: <OrderHistory/>
+            },
+            {
+                path: '*',
+                element: <Notfound />
+            }
+        ]
+    }
+])
+
+export { router }
