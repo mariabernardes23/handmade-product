@@ -21,13 +21,18 @@ export function Form(props: { product: ProductData}) {
 
     const handleSubmit = useCallback((e: FormEvent) => {
         e.preventDefault()
-        if(props.product.uid == null) {  
-            addProduct(name, description, price, quantity)
+        if(name == '' || description == '' || price == 0 || quantity == 0) {
+            alert("Prencha todos os campos do fomulario!")
+            return
         } else {
-            updateProduct(props.product.uid, props.product.id, name, description, price, quantity)
+            if(props.product.uid == null) { 
+                addProduct(name, description, price, quantity)
+            } else {
+                updateProduct(props.product.uid, props.product.id, name, description, price, quantity)
+            }
+            clearField()
+            navigate('/', { replace: true })
         }
-        clearField()
-        navigate('/', { replace: true })
     }, [name, description, price, quantity])
     
     return(
@@ -60,7 +65,7 @@ export function Form(props: { product: ProductData}) {
             />
 
             <input 
-                placeholder="Valor do Produto"
+                placeholder="Quantidade"
                 type="number"
                 min={1}
                 value={quantity}

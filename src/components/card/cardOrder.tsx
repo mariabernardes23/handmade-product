@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react"
 import { CartContext } from "../../context/cartContext"
-import { OrderContext, OrderData } from "../../context/orderContext"
+import { OrderData } from "../../context/orderContext"
 import { CardBody, CardButton, CardContainer, CardDiv, CardFlex, CardFlexII, CardImg, CardText, CardTitle } from "../style-componentns/cardOrder/style"
 
 const CardOrder: React.FC<OrderData> = ({uid, nameSeller, order}) => {
@@ -15,7 +15,7 @@ const CardOrder: React.FC<OrderData> = ({uid, nameSeller, order}) => {
     }, [order])
 
     function addCart() {
-        order.map((item, index) => {
+        order.map((item) => {
             addProductCart(item.uid, item.id, item.name, item.description, item.price, item.quantity)
         })
     }

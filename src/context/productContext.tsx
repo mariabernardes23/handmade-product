@@ -88,7 +88,7 @@ export function ProductProvider({ children } : ProductProviderProps ) {
                 productAt: new Date()
             })
             .then(() => {
-                alert('Produto cadastrado com sucesso')
+                alert('Produto cadastrado com sucesso!')
             })
             .catch((error) => {
                 console.log(error);
