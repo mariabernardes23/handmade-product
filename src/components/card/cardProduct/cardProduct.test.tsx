@@ -1,39 +1,37 @@
-import { fireEvent, render, waitFor } from "@testing-library/react"
+import { fireEvent, render } from "@testing-library/react"
 import CardProduct from "./cardProduct"
-import { MemoryRouter } from "react-router-dom"
-import { ProductContext } from "../../../context/productContext"
-import { Cart } from "../../../pages/cart"
 import { CardButton } from "../../style-componentns/card/style"
 import { ShoppingCart } from "@phosphor-icons/react"
+import { MemoryRouter } from "react-router-dom"
 
-global.alert = jest.fn();
+global.alert = jest.fn()
 
 jest.mock('react-router-dom', () => {
-    const nav = jest.fn();
+    const nav = jest.fn()
     return {
       ...jest.requireActual('react-router-dom'),
       mockedNavigation: nav,
-      useLocation: jest.fn(() => ({ pathname: '/' })),
       useNavigate: jest.fn(() => nav),
-    };
-});
+    }
+})
   
-const Router = require('react-router-dom');
+const Router = require('react-router-dom')
 
 describe(("Compomente Card Product"), () => {
     beforeEach(() => {
         jest.clearAllMocks();
-      });
-    test("Verifica botão fornecedor", () => {
+    });
+
+    test("Verifica se o botão fornecedor aparece na tela quando a quantidade do produto é igual a 0", () => {
         const { getByText } = render(
             <MemoryRouter>
                 <CardProduct 
-                     uid={"abcd1234"} 
-                     id={1} 
-                     name={"Produto Teste"} 
-                     description={"Descrição Produto teste"} 
-                     price={100} 
-                     quantity={0} 
+                    uid={"abcd1234"} 
+                    id={1} 
+                    name={"Produto Teste"} 
+                    description={"Descrição Produto teste"} 
+                    price={100} 
+                    quantity={0} 
                 />
             </MemoryRouter>
         )
@@ -42,25 +40,34 @@ describe(("Compomente Card Product"), () => {
         expect(button).toBeInTheDocument()
     })
 
-    test("Verifica se direciona o produto para atualizar", async () => {
+    test("Verifica se redireciona o produto para a página de atualização", async () => {
+        const mockProduct = {
+            uid: "abcd123",
+            id: 1,
+            name: "Nome Produto",
+            description: "Descrição Produto",
+            price: 10,
+            quantity: 100,
+        }
         
+        const { getByLabelText } = render(
+            <Router.MemoryRouter initialEntries={['/']}>
+              <CardProduct {...mockProduct} />
+            </Router.MemoryRouter>
+        );
 
         const button = getByLabelText("Alterar Produto")
         fireEvent.click(button)
 
-        expect(Router.mockedNavigation).toHaveBeenCalledWith("/update-product")
-        //console.log(getByLabelText("Alterar Produto"));
-        //console.log("click" + fireEvent.click(button));
-        
-
-        // const url = window.location.pathname
-        // console.log(url);
-        
-        // expect(button).toBeInTheDocument()
-        // expect(url).toEqual("/update-product")
+        expect(Router.mockedNavigation).toHaveBeenCalledWith(
+            '/update-product',
+            {
+              state: { product: mockProduct },
+            }
+        )
     })
 
-    test("Vericação se ao clicar no botão faz a chamada da função para adicionar o produto no carrinho", async () => {
+    test("Vericação se ao clicar no botão faz a chamada da função para adicionar o produto no carrinho com os dados corretos do produto", async () => {
         const mockAddProductCart = jest.fn()
 
         const { getByRole } = render(

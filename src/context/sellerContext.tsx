@@ -13,7 +13,8 @@ interface SellerContextData {
 export interface SellerData {
     uid: string,
     id: number,
-    name: string
+    name: string,
+    imgUrl: string
 }
 
 export const SellerContext = createContext({} as SellerContextData)
@@ -36,7 +37,8 @@ export function SellerProvider({children} : SellerProviderProps) {
                     {
                         uid: doc.id,
                         id: doc.data().id,
-                        name: doc.data().name
+                        name: doc.data().name,
+                        imgUrl: doc.data().imgUrl
                     }
                 )
                 setListSeller(list)

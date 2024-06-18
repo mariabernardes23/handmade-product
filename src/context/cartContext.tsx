@@ -141,7 +141,7 @@ export function CartProvider({ children } : CartProviderProps) {
         })
         .then(() => {
             listProductCart.splice(index, 1, updateProduct)
-            alert("Quantidade Atulizada com sucesso")
+            alert("Quantidade Atulizada com sucesso!")
         })
         .catch((error) => {
             console.log("Erro:" + error);
@@ -155,8 +155,7 @@ export function CartProvider({ children } : CartProviderProps) {
         .then(() => {
             const newListProduct = listProductCart.filter(item => item.uid !== uid);
             setListProductCart(newListProduct);
-            console.log(listProductCart.length);
-            console.log("produto removido do carrinho com sucesso");
+            alert("Produto removido do carrinho com sucesso!");
         })
         .catch((error) => {
             console.log(error);

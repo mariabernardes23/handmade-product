@@ -77,7 +77,7 @@ export function ProductProvider({ children } : ProductProviderProps ) {
         const product = await checkProduct(id)
         
         if(product.isProduct) {
-            alert('Produto já cadastrado')
+            alert('Produto já está cadastrado!')
         } else {
             await addDoc(collection(db, 'product'), {
                 id: id,
@@ -138,7 +138,7 @@ export function ProductProvider({ children } : ProductProviderProps ) {
         })
         .then(() => {
             listProduct.splice(index, 1, updateProduct)
-            alert("Produto Atualizado com sucesso")
+            alert("Produto atualizado com sucesso!")
         })
         .catch((error) => {
             console.log(error);
@@ -159,7 +159,7 @@ export function ProductProvider({ children } : ProductProviderProps ) {
         })
         .then(() => {
             listProduct.splice(index, 1, updateProduct)
-            console.log("Produto Atualizado com sucesso")
+            alert("Quantidade do produto Atualizado com sucesso!")
         })
         .catch((error) => {
             console.log(error);
@@ -173,7 +173,7 @@ export function ProductProvider({ children } : ProductProviderProps ) {
         .then(() => {
             const newListProduct = listProduct.filter(item => item.uid === uid)
             setListProduct(newListProduct)
-            alert("Produto deletado com sucesso")
+            alert("Produto deletado com sucesso!")
         })
         .catch((error) => {
             console.log(error);

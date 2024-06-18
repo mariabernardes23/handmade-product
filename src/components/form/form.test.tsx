@@ -5,13 +5,13 @@ import { Form } from "../form/index";
 
 global.alert = jest.fn();
 
-describe('no formulário', () => {
-    test("Verificação se um produto é cadastrado e salvo no banco de dados com sucesso", async () => {
-        const product = {} as ProductData;
+describe('Compomente Form', () => {
+    test("Verifica se os dados do produto são capturado pelos inputs do formulário", () => {
+        const mockProduct = {} as ProductData;
         const { getByPlaceholderText, getByText } = render(
             <MemoryRouter>
                 <ProductProvider>
-                    <Form product={product} />
+                    <Form product={mockProduct} />
                 </ProductProvider>
             </MemoryRouter>
         );
@@ -32,18 +32,19 @@ describe('no formulário', () => {
         fireEvent.change(inputDescription, { target: { value: 'Descrição Produto Teste' } })
         fireEvent.change(inputPrice, { target: { value: 100 } })
         fireEvent.change(inputQuantity, { target: { value: 10 } })
+
         expect(inputName).toHaveValue('Produto Teste')
         expect(inputDescription).toHaveValue('Descrição Produto Teste')
         expect(inputPrice).toHaveValue(100)
         expect(inputQuantity).toHaveValue(10)
     });
 
-    test("Verificação se um produto é criado com dados incopleto", async () => {
-        const product = {} as ProductData;
+    test("Verifica se ocorre o envio do formulário com os dados incompletos", async () => {
+        const mockProduct = {} as ProductData;
         const { getByPlaceholderText, getByText } = render(
             <MemoryRouter>
                 <ProductProvider>
-                    <Form product={product} />
+                    <Form product={mockProduct} />
                 </ProductProvider>
             </MemoryRouter>
         );
@@ -71,8 +72,8 @@ describe('no formulário', () => {
         });
     });
 
-    test("Verifica se o formulario é preenchido com os dados do produto para alteração", () => {
-        const product = {
+    test("Verifica se o formulário é preenchido com os dados do produto para alteração", () => {
+        const mockProduct = {
             uid: "abcd123",
             id: 1,
             name: "Nome Produto",
@@ -84,7 +85,7 @@ describe('no formulário', () => {
         const { getByPlaceholderText, getByText } = render(
             <MemoryRouter>
                 <ProductProvider>
-                    <Form product={product} />
+                    <Form product={mockProduct} />
                 </ProductProvider>
             </MemoryRouter>
         );
@@ -95,10 +96,10 @@ describe('no formulário', () => {
         const inputQuantity = getByPlaceholderText("Quantidade")
         const button = getByText("Atualizar")
 
-        expect(inputName).toHaveValue(product.name)
-        expect(inputDescription).toHaveValue(product.description)
-        expect(inputPrice).toHaveValue(product.price)
-        expect(inputQuantity).toHaveValue(product.quantity)
+        expect(inputName).toHaveValue(mockProduct.name)
+        expect(inputDescription).toHaveValue(mockProduct.description)
+        expect(inputPrice).toHaveValue(mockProduct.price)
+        expect(inputQuantity).toHaveValue(mockProduct.quantity)
         expect(button).toBeInTheDocument()
     })
-});
+})

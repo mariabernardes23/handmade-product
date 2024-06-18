@@ -4,9 +4,9 @@ import { MemoryRouter } from "react-router-dom"
 import { UserContext } from "../../context/userContext"
 
 describe(("Compomente User"), () => {
-    test("Verificação menssagem quando o usuário não esta logado", () => {
+    test("Verifica a menssagem que aparece quando o usuário não está logado", () => {
         function addUser() {}
-        const user = {
+        const mockUser = {
             uid: '',
             name: '',
             email: ''
@@ -14,7 +14,7 @@ describe(("Compomente User"), () => {
 
         const { getByText } = render(
             <MemoryRouter>
-                <UserContext.Provider value={{addUser, user}}>
+                <UserContext.Provider value={{addUser, user: mockUser}}>
                     <User/>
                 </UserContext.Provider>
             </MemoryRouter>
@@ -26,7 +26,7 @@ describe(("Compomente User"), () => {
     
     test("Verifica se o botão de login está na tela", () => {
         function addUser() {}
-        const user = {
+        const mockUser = {
             uid: '',
             name: '',
             email: ''
@@ -34,7 +34,7 @@ describe(("Compomente User"), () => {
 
         const { getByText } = render(
             <MemoryRouter>
-                <UserContext.Provider value={{addUser, user}}>
+                <UserContext.Provider value={{addUser, user: mockUser}}>
                     <User/>
                 </UserContext.Provider>
             </MemoryRouter>
@@ -44,9 +44,9 @@ describe(("Compomente User"), () => {
         expect(buttonLogin).toBeInTheDocument()
     })
 
-    test("Verificação menssagem quando o usuário está logado", () => {
+    test("Verifica a menssagem que aparece quando o usuário está logado", () => {
         function addUser() {}
-        const user = {
+        const mockUser = {
             uid: '123',
             name: 'Teste Almeida',
             email: 'teste@gmail.com'
@@ -54,19 +54,19 @@ describe(("Compomente User"), () => {
 
         const { getByText } = render(
             <MemoryRouter>
-                <UserContext.Provider value={{addUser, user}}>
+                <UserContext.Provider value={{addUser, user: mockUser}}>
                     <User/>
                 </UserContext.Provider>
             </MemoryRouter>
         )
     
-        const welcon = getByText(`Olá, ${user.name}!`)
+        const welcon = getByText(`Olá, ${mockUser.name}!`)
         expect(welcon).toBeInTheDocument()
     })
     
-    test("Verifica botão logout", () => {
+    test("Verifica se o botão de logout está na tela", () => {
         function addUser() {}
-        const user = {
+        const mockUser = {
             uid: '123',
             name: 'Teste Almeida',
             email: 'teste@gmail.com'
@@ -74,7 +74,7 @@ describe(("Compomente User"), () => {
 
         const { getByText } = render(
             <MemoryRouter>
-                <UserContext.Provider value={{addUser, user}}>
+                <UserContext.Provider value={{addUser, user: mockUser}}>
                     <User/>
                 </UserContext.Provider>
             </MemoryRouter>

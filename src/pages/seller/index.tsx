@@ -19,7 +19,9 @@ export function Seller() {
                         key={index}
                         uid={item.uid}
                         id={item.id}
-                        name={item.name} />
+                        name={item.name} 
+                        imgUrl={item.imgUrl}
+                    />
                 )
                 )}
             </div>

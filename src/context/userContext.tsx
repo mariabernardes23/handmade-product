@@ -36,7 +36,6 @@ export function UserProvider({ children }:  UserProviderProps) {
                     email: user.email
                 })
             } else {
-                console.log("não logado");
                 setUser({
                     uid: '',
                     name: '',

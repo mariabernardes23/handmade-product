@@ -36,7 +36,7 @@ export function OrderProvider({ children }: OrderProviderProps) {
             orders: orders
         })
         .then(() => {
-            console.log("Pedido salvo no banco");
+            alert("Pedido finalizado com sucesso!");
         })
         .catch((error) => {
             console.log(error);  
