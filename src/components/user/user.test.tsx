@@ -1,38 +1,50 @@
 import { render } from "@testing-library/react"
 import { User } from "."
 import { MemoryRouter } from "react-router-dom"
-import { UserContext, UserProvider } from "../../context/userContext"
+import { UserContext } from "../../context/userContext"
 
-describe(("Verificação sem usuário logado"), () => {
-    test("Verifica nome usuário quanto não tem usuario", () => {
+describe(("Compomente User"), () => {
+    test("Verificação menssagem quando o usuário não esta logado", () => {
+        function addUser() {}
+        const user = {
+            uid: '',
+            name: '',
+            email: ''
+        }
+
         const { getByText } = render(
             <MemoryRouter>
-                <UserProvider>
+                <UserContext.Provider value={{addUser, user}}>
                     <User/>
-                </UserProvider>
+                </UserContext.Provider>
             </MemoryRouter>
         )
     
-        const welcon = getByText(`Olá, vendedor(a)!`)
+        const welcon = getByText("Olá, vendedor(a)!")
         expect(welcon).toBeInTheDocument()
     })
     
-    test("Verifica botão login", () => {
+    test("Verifica se o botão de login está na tela", () => {
+        function addUser() {}
+        const user = {
+            uid: '',
+            name: '',
+            email: ''
+        }
+
         const { getByText } = render(
             <MemoryRouter>
-                <UserProvider>
+                <UserContext.Provider value={{addUser, user}}>
                     <User/>
-                </UserProvider>
+                </UserContext.Provider>
             </MemoryRouter>
         )
     
         const buttonLogin = getByText("Entrar")
         expect(buttonLogin).toBeInTheDocument()
     })
-})
 
-describe(("Verificação com usuário logado"), () => {
-    test("Verifica nome usuário quanto não tem usuario", () => {
+    test("Verificação menssagem quando o usuário está logado", () => {
         function addUser() {}
         const user = {
             uid: '123',
@@ -48,7 +60,7 @@ describe(("Verificação com usuário logado"), () => {
             </MemoryRouter>
         )
     
-        const welcon = getByText(`Olá, Teste Almeida!`)
+        const welcon = getByText(`Olá, ${user.name}!`)
         expect(welcon).toBeInTheDocument()
     })
     

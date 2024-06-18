@@ -35,10 +35,9 @@ const CardProduct: React.FC<ProductData> = ({uid, id, name, description, price, 
                 {
                     quantity > 0 ?
                         <CardFlex>
-                            <CardButton onClick={handleSubmit}>Alterar </CardButton>
-                            {/* <CardButton onClick={handleSubmit}> <Pencil size={24}/> </CardButton> */}
+                            <CardButton onClick={handleSubmit} aria-label="Alterar Produto"> <Pencil size={24}/> </CardButton>
                             <CardButton onClick={() => deleteProduct(uid)}> <Trash size={24}/> </CardButton>
-                            <CardButton onClick={() => addProductCart(uid, id, name, description, price, 0)}> <ShoppingCart size={24} /> </CardButton>
+                            <CardButton onClick={() => addProductCart(uid, id, name, description, price, 0)} aria-label="Adicionar ao Carrinho"> <ShoppingCart size={24} /> </CardButton>
                         </CardFlex> 
                         : 
                         <CardCenter>
