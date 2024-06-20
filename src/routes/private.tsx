@@ -16,18 +16,6 @@ export function Private({ children }: PrivateProps) {
     const { user } = useContext(UserContext) 
 
     useEffect(() => {
-        // const unsub = onAuthStateChanged(auth, (user) => {
-        //     if(user) {
-        //         setSigned(true)
-        //     } else {
-        //         setSigned(false);
-        //     }
-        //     setLoading(false);
-        // })
-
-        // return () => {
-        //     unsub()
-        // }
         if(user.uid == '' && user.email == '' && user.name == '') {
             setSigned(false)
         } else {

@@ -6,7 +6,8 @@ import { UserContext } from "../../context/userContext"
 
 describe(("Compomente User"), () => {
     test("Verifica a menssagem que aparece quando o usuário não está logado", () => {
-        function addUser() {}
+        const addUser = jest.fn()
+        const checkRegister = jest.fn()
         const mockUser = {
             uid: '',
             name: '',
@@ -15,7 +16,7 @@ describe(("Compomente User"), () => {
 
         const { getByText } = render(
             <MemoryRouter>
-                <UserContext.Provider value={{addUser, user: mockUser}}>
+                <UserContext.Provider value={{addUser, user: mockUser, checkRegister}}>
                     <User/>
                 </UserContext.Provider>
             </MemoryRouter>
@@ -26,7 +27,8 @@ describe(("Compomente User"), () => {
     })
     
     test("Verifica se o botão de login está na tela", () => {
-        function addUser() {}
+        const addUser = jest.fn()
+        const checkRegister = jest.fn()
         const mockUser = {
             uid: '',
             name: '',
@@ -35,7 +37,7 @@ describe(("Compomente User"), () => {
 
         const { getByText } = render(
             <MemoryRouter>
-                <UserContext.Provider value={{addUser, user: mockUser}}>
+                <UserContext.Provider value={{addUser, user: mockUser, checkRegister}}>
                     <User/>
                 </UserContext.Provider>
             </MemoryRouter>
@@ -46,7 +48,8 @@ describe(("Compomente User"), () => {
     })
 
     test("Verifica a menssagem que aparece quando o usuário está logado", () => {
-        function addUser() {}
+        const addUser = jest.fn()
+        const checkRegister = jest.fn()
         const mockUser = {
             uid: '123',
             name: 'Teste Almeida',
@@ -55,7 +58,7 @@ describe(("Compomente User"), () => {
 
         const { getByText } = render(
             <MemoryRouter>
-                <UserContext.Provider value={{addUser, user: mockUser}}>
+                <UserContext.Provider value={{addUser, user: mockUser, checkRegister}}>
                     <User/>
                 </UserContext.Provider>
             </MemoryRouter>
@@ -66,7 +69,8 @@ describe(("Compomente User"), () => {
     })
     
     test("Verifica se o botão de logout está na tela", () => {
-        function addUser() {}
+        const addUser = jest.fn()
+        const checkRegister = jest.fn()
         const mockUser = {
             uid: '123',
             name: 'Teste Almeida',
@@ -75,7 +79,7 @@ describe(("Compomente User"), () => {
 
         const { getByText } = render(
             <MemoryRouter>
-                <UserContext.Provider value={{addUser, user: mockUser}}>
+                <UserContext.Provider value={{addUser, user: mockUser, checkRegister}}>
                     <User/>
                 </UserContext.Provider>
             </MemoryRouter>

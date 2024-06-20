@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, query } from "firebase/firestore";
+import { addDoc, collection, getDocs, limit, query, where } from "firebase/firestore";
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { auth, db } from "../services/firebaseConnection";
 import { onAuthStateChanged } from "firebase/auth";
@@ -10,6 +10,7 @@ interface UserProviderProps {
 interface UserContextData {
     addUser: (uid: string, name: string, email: string) => void
     user: UserData
+    checkRegister: (email: string) => Promise<boolean>
 }
 
 interface UserData {
@@ -72,8 +73,16 @@ export function UserProvider({ children }:  UserProviderProps) {
         }
     }
 
+    async function checkRegister(email: string) {
+        const userCollection = collection(db, 'user')
+        const queryRef = query(userCollection, where('email', '==', email), limit(1))
+        const snapshot = await getDocs(queryRef)
+        
+        return snapshot.empty
+    }
+
     return(
-        <UserContext.Provider value={{addUser, user}}>
+        <UserContext.Provider value={{addUser, user, checkRegister}}>
             {children}
         </UserContext.Provider>
     )

@@ -21,7 +21,7 @@ const Router = require('react-router-dom')
 describe(("Compomente Card Product"), () => {
     beforeEach(() => {
         jest.clearAllMocks();
-    });
+    })
 
     test("Verifica se o botão fornecedor aparece na tela quando a quantidade do produto é igual a 0", () => {
         const { getByText } = render(
