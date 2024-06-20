@@ -3,6 +3,7 @@ import { User } from "."
 import { MemoryRouter } from "react-router-dom"
 import { UserContext } from "../../context/userContext"
 
+
 describe(("Compomente User"), () => {
     test("Verifica a menssagem que aparece quando o usuário não está logado", () => {
         function addUser() {}

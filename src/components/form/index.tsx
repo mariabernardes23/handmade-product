@@ -7,16 +7,16 @@ import { useNavigate } from "react-router-dom"
 export function Form(props: { product: ProductData}) {
     const [name, setName] = useState( props.product.name || '')
     const [description, setDescription] = useState(props.product.description ||'')
-    const [price, setPrice] = useState(props.product.price || 0)
-    const [quantity, setQuantity] = useState(props.product.quantity || 0)
+    const [price, setPrice] = useState(props.product.price || '')
+    const [quantity, setQuantity] = useState(props.product.quantity || '')
     const { addProduct, updateProduct } = useContext(ProductContext)
     const navigate = useNavigate()
     
     const clearField = useCallback(() => {
         setName('')
         setDescription('')
-        setPrice(0)
-        setQuantity(0)
+        setPrice('')
+        setQuantity('')
     }, [])
 
     const handleSubmit = useCallback((e: FormEvent) => {
@@ -26,9 +26,9 @@ export function Form(props: { product: ProductData}) {
             return
         } else {
             if(props.product.uid == null) { 
-                addProduct(name, description, price, quantity)
+                addProduct(name, description, Number(price), Number(quantity))
             } else {
-                updateProduct(props.product.uid, props.product.id, name, description, price, quantity)
+                updateProduct(props.product.uid, props.product.id, name, description, Number(price), Number(quantity))
             }
             clearField()
             navigate('/', { replace: true })
@@ -58,7 +58,7 @@ export function Form(props: { product: ProductData}) {
                 placeholder="Valor do Produto"
                 type="number"
                 min={1}
-                step={0.5}
+                step={0.1}
                 value={price}
                 onChange={(e) => setPrice(Number(e.target.value))}
                 className="input"

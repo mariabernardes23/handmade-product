@@ -31,23 +31,24 @@ export function OrderHistory() {
             </form>
 
             {
-                nameSeller != '' &&  nameSeller != 'select' ? listOrderSeller.map((item, index) => (
-                    <CardOrder 
-                    key={index}
-                    uid={item.uid} 
-                    nameSeller={item.nameSeller} 
-                    order={item.order}
-                    />
-                ))
-                :
-                listOrder.map((item, index) => (
-                    <CardOrder 
+                nameSeller != '' &&  nameSeller != 'select' ? 
+                    listOrderSeller.map((item, index) => (
+                        <CardOrder 
                         key={index}
                         uid={item.uid} 
                         nameSeller={item.nameSeller} 
                         order={item.order}
-                    />
-                ))
+                        />
+                    ))
+                :
+                    listOrder.map((item, index) => (
+                        <CardOrder 
+                            key={index}
+                            uid={item.uid} 
+                            nameSeller={item.nameSeller} 
+                            order={item.order}
+                        />
+                    ))
             }
         </div>
     )

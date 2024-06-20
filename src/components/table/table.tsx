@@ -1,12 +1,24 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Table, TableBody, TableButton, TableContainer, TableHeader, TableImg, TableTd, TableText, TableTh, TableTr } from "../style-componentns/table/style";
 import { CheckFat, Pencil, Trash } from "@phosphor-icons/react";
 import { CartContext, ProductCartData } from "../../context/cartContext";
+import { ImageContext } from "../../context/imageContext";
 
 const TableCart: React.FC<ProductCartData> = ({uid, uidProduct, id, name, description, price, quantity}) => {
     const { deleteProductCart, updateProductCart } = useContext(CartContext)
     const [ editProduct, setEditProduct] = useState(false)
     const [ newQuantity, setNewQuantity ] = useState(quantity)
+    const { getImage } = useContext(ImageContext);
+    const [img, setImg] = useState('')
+
+    useEffect(() => {
+        async function getImg() {
+            const imageUrl = await getImage(name);
+            setImg(imageUrl)
+        }
+
+        getImg()
+    }, [uid]);
     
     const increment = useCallback(() => {
         setNewQuantity(valueCurrent => valueCurrent + 1)   
@@ -45,7 +57,7 @@ const TableCart: React.FC<ProductCartData> = ({uid, uidProduct, id, name, descri
                     <TableBody>
                         <TableTr>
                             <TableTd>
-                                <TableImg src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Floor-stone_02.JPG/1200px-Floor-stone_02.JPG' />
+                                <TableImg src={img} />
                                 <TableText>{name}</TableText>
                             </TableTd>
                             

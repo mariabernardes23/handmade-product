@@ -2,14 +2,26 @@ import { Pencil, ShoppingCart, Trash } from "@phosphor-icons/react";
 import { ProductContext, ProductData } from "../../../context/productContext";
 import { CardBody, CardButton, CardButtonII, CardCenter, CardContainer, CardFlex, CardImg, CardText, CardTitle } from "../../style-componentns/card/style";
 import { useNavigate } from "react-router-dom";
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { CartContext } from "../../../context/cartContext";
+import { ImageContext } from "../../../context/imageContext";
 
 const CardProduct: React.FC<ProductData> = ({uid, id, name, description, price, quantity}) => {
     const navigate = useNavigate()
     const { deleteProduct } = useContext(ProductContext)
     const { addProductCart } = useContext(CartContext)
-    
+    const { getImage } = useContext(ImageContext);
+    const [img, setImg] = useState('')
+
+    useEffect(() => {
+        async function getImg() {
+            const imageUrl = await getImage(name);
+            setImg(imageUrl)
+        }
+
+        getImg()
+    }, [uid]);
+
     const handleSubmit = useCallback(() => {
         const product = {
             uid: uid,
@@ -24,7 +36,7 @@ const CardProduct: React.FC<ProductData> = ({uid, id, name, description, price, 
     
     return(
         <CardContainer>
-            <CardImg src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Floor-stone_02.JPG/1200px-Floor-stone_02.JPG' />
+            <CardImg src={img} />
             <CardBody>
                 <CardTitle>{name}</CardTitle>
                 <CardText>{description}</CardText> 

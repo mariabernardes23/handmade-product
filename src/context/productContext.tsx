@@ -98,7 +98,7 @@ export function ProductProvider({ children } : ProductProviderProps ) {
 
     function getProducts() {
         const productCollection = collection(db, 'product')
-        const queryRef = query(productCollection)
+        const queryRef = query(productCollection, orderBy("productAt", "desc"))
         
         onSnapshot(queryRef, (snapshot) => {
             const list = [] as ProductData[]
@@ -159,7 +159,6 @@ export function ProductProvider({ children } : ProductProviderProps ) {
         })
         .then(() => {
             listProduct.splice(index, 1, updateProduct)
-            alert("Quantidade do produto Atualizado com sucesso!")
         })
         .catch((error) => {
             console.log(error);

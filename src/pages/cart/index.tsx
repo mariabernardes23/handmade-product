@@ -21,7 +21,7 @@ export function Cart() {
             let product = listProduct.find(product => product.id === productCart.id)
 
             if(productCart.quantity > product.quantity) {
-                alert(product?.name + 'não a quantidade suficiente no estoque')
+                alert("Não há quantidade suficiente de " + product.name + " no estoque.\nQuantidade do produdo em estoque " + product.quantity)
                 return false
             }
         }
@@ -30,7 +30,6 @@ export function Cart() {
 
     const finish = useCallback((e: FormEvent)=> {
         e.preventDefault()
-        console.log(nameSeller);
         
         if (nameSeller != '' && nameSeller != 'select' && checkQuantityProduct()) {
             addOrder(nameSeller, listProductCart)
@@ -38,6 +37,8 @@ export function Cart() {
                 updateQuatityProduct(item.uidProduct, item.id, item.quantity)
             })
             clearCart()
+        } else {
+            alert("Selecione um vendedor para finalizar a compra!")
         }
     }, [nameSeller, listProductCart])
 

@@ -9,6 +9,7 @@ import { Seller } from "./pages/seller";
 import { OrderHistory } from "./pages/orderHistory";
 import { Private } from "./routes/private";
 import { Notfound } from "./pages/notfound";
+import { ImageProvider } from "./context/imageContext";
 
 const router = createBrowserRouter([
     {
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home/>
+                element: <ImageProvider> <Home/> </ImageProvider>
             },
             {
                 path: '/login',
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
             }, 
             {
                 path: '/cart',
-                element: <Private> <Cart/>  </Private>
+                element: <Private> <ImageProvider> <Cart/> </ImageProvider> </Private>
             },
             {
                 path: '/sellers',
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/order-history',
-                element: <OrderHistory/>
+                element: <ImageProvider> <OrderHistory/> </ImageProvider>
             },
             {
                 path: '*',

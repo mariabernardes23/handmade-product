@@ -30,19 +30,6 @@ export function Login() {
     }, [email, password]);
  
     const singInGoogle = useCallback(async () => {
-        // signInWithPopup(auth, provider)
-        // .then((result) => {
-        //     const credential = GoogleAuthProvider.credentialFromResult(result);
-        //     const token = credential.accessToken;
-        //     const user = result.user;
-        //     console.log(user.uid, user.displayName, user.email)
-        //     addUser(user.uid, user.displayName, user.email)
-        //     navigate('/', { replace: true })
-        //     alert('Login realizado com sucesso')
-        // }).catch((error) => {
-        //     console.log(error);
-        //     console.log(GoogleAuthProvider.credentialFromError(error));
-        // });
         const userCred = await signInWithPopup(auth, provider);
         console.log(userCred.user);
         if(userCred) {

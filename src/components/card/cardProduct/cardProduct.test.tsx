@@ -3,6 +3,7 @@ import CardProduct from "./cardProduct"
 import { CardButton } from "../../style-componentns/card/style"
 import { ShoppingCart } from "@phosphor-icons/react"
 import { MemoryRouter } from "react-router-dom"
+import { ImageProvider } from "../../../context/imageContext"
 
 global.alert = jest.fn()
 
@@ -25,14 +26,16 @@ describe(("Compomente Card Product"), () => {
     test("Verifica se o botão fornecedor aparece na tela quando a quantidade do produto é igual a 0", () => {
         const { getByText } = render(
             <MemoryRouter>
-                <CardProduct 
-                    uid={"abcd1234"} 
-                    id={1} 
-                    name={"Produto Teste"} 
-                    description={"Descrição Produto teste"} 
-                    price={100} 
-                    quantity={0} 
-                />
+                <ImageProvider>
+                    <CardProduct 
+                        uid={"abcd1234"} 
+                        id={1} 
+                        name={"Produto Teste"} 
+                        description={"Descrição Produto teste"} 
+                        price={100} 
+                        quantity={0} 
+                    />
+                </ImageProvider>
             </MemoryRouter>
         )
     
@@ -52,7 +55,9 @@ describe(("Compomente Card Product"), () => {
         
         const { getByLabelText } = render(
             <Router.MemoryRouter initialEntries={['/']}>
-              <CardProduct {...mockProduct} />
+                <ImageProvider> 
+                    <CardProduct {...mockProduct} />
+                </ImageProvider> 
             </Router.MemoryRouter>
         );
 

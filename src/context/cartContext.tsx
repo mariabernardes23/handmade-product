@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
-import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, query, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, updateDoc, where } from "firebase/firestore";
 import { db } from "../services/firebaseConnection";
 
 interface CartProviderProps {
@@ -105,7 +105,7 @@ export function CartProvider({ children } : CartProviderProps) {
 
     function getDataProductsCart() {
         const cartCollection = collection(db, 'cart')
-        const queryRef = query(cartCollection)
+        const queryRef = query(cartCollection, orderBy("cartAt", "desc"))
 
         onSnapshot(queryRef, (snapshot) => {
             const list = [] as ProductCartData[]

@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { ProductData } from "./productContext";
-import { addDoc, collection, onSnapshot, query, where } from "firebase/firestore";
+import { addDoc, collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { db } from "../services/firebaseConnection";
 
 interface OrderProviderProps {
@@ -33,7 +33,8 @@ export function OrderProvider({ children }: OrderProviderProps) {
     async function addOrder(nameSeller: string, orders: ProductData[]) {
         addDoc(collection(db, 'order'), {
             nameSeller: nameSeller,
-            orders: orders
+            orders: orders,
+            orderAt: new Date()
         })
         .then(() => {
             alert("Pedido finalizado com sucesso!");
@@ -45,7 +46,7 @@ export function OrderProvider({ children }: OrderProviderProps) {
 
     function getDataOrder() {
         const orderCollection = collection(db, 'order')
-        const queryRef = query(orderCollection)
+        const queryRef = query(orderCollection, orderBy("orderAt", "desc"))
 
         onSnapshot(queryRef, (snapshot) => {
             const list = [] as OrderData[]

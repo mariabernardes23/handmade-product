@@ -1,11 +1,23 @@
-import { useContext, useMemo } from "react"
+import { useContext, useEffect, useMemo, useState } from "react"
 import { CartContext } from "../../context/cartContext"
 import { OrderData } from "../../context/orderContext"
 import { CardBody, CardButton, CardContainer, CardDiv, CardFlex, CardFlexII, CardImg, CardText, CardTitle } from "../style-componentns/cardOrder/style"
+import { ImageContext } from "../../context/imageContext"
 
 const CardOrder: React.FC<OrderData> = ({uid, nameSeller, order}) => {
     const { addProductCart } = useContext(CartContext)
+    const { getImage } = useContext(ImageContext);
+    const [img, setImg] = useState('')
 
+    useEffect(() => {
+        async function getImg() {
+            const imageUrl = await getImage("product");
+            setImg(imageUrl)
+        }
+
+        getImg()
+    }, [uid]);
+    
     const totalPrice = useMemo(() => {
         let sunPrice = 0
         order.map(item => {
@@ -27,7 +39,7 @@ const CardOrder: React.FC<OrderData> = ({uid, nameSeller, order}) => {
                 order.map((item, index) => (
                     <CardBody key={index}>
                         <CardFlex key={index}>
-                            <CardImg src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Floor-stone_02.JPG/1200px-Floor-stone_02.JPG'/>
+                            <CardImg src={img}/>
                             <CardDiv>
                                 <CardText>{item.name}</CardText>
                                 <CardText>R$ {item.price}</CardText>
