@@ -53,7 +53,7 @@ const CardProduct: React.FC<ProductData> = ({uid, id, name, description, price, 
                         </CardFlex> 
                         : 
                         <CardCenter>
-                            <CardButtonII>Solicitar Produto Fornecedor</CardButtonII>
+                            <CardButtonII onClick={() => alert("Produto solicitado ao fornecedor!")}>Solicitar Produto Fornecedor</CardButtonII>
                         </CardCenter>
                 }
             </CardBody>

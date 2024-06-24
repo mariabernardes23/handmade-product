@@ -30,10 +30,12 @@ export function Cart() {
 
     const finish = useCallback((e: FormEvent)=> {
         e.preventDefault()
-        
+        console.log("Aqui 1");
         if (nameSeller != '' && nameSeller != 'select' && checkQuantityProduct()) {
             addOrder(nameSeller, listProductCart)
             listProductCart.map((item) => {
+                console.log(item.name);
+                console.log("Aqui 2");
                 updateQuatityProduct(item.uidProduct, item.id, item.quantity)
             })
             clearCart()
